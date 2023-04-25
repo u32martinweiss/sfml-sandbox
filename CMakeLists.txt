@@ -16,6 +16,8 @@ find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 add_executable(
   ${PROJECT_NAME}
   src/Main.cpp
+  src/Classes/Game.cpp
+  src/Headers/Game.hpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-audio)
