@@ -10,8 +10,12 @@ project(${PROJECT_NAME})
 # C++ Standard
 set(CMAKE_CXX_STANDARD 11)
 
+# Packages
+find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
+
 add_executable(
   ${PROJECT_NAME}
   src/Main.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC src)
+target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-audio)
