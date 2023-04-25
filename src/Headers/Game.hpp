@@ -2,11 +2,16 @@
 #define GAME_HPP
 
 #include <SFML/Graphics.hpp>
+#include <libconfig.h++>
+#include <iostream>
 
 class Game {
   private:
     sf::RenderWindow* window;
     sf::Event sfEvent;
+
+    // Initializers
+    void initWindow();
 
   public:
     // Constructor and Destructor
