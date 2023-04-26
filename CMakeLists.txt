@@ -19,6 +19,7 @@ add_executable(
   src/Main.cpp
   src/Classes/Game.cpp
   src/Headers/Game.hpp
+  src/Structs/Tile.hpp
   src/Constants.hpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC src)

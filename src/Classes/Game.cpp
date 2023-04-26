@@ -1,5 +1,19 @@
 #include "../Headers/Game.hpp"
 
+// Non-meber Functions
+
+sf::Color getTileColor(unsigned int tileType)
+{
+  switch (tileType)
+  {
+    case TileType::SAND:
+      return sf::Color(252U, 219U, 129U);
+
+    default:
+      return sf::Color::White;
+  }
+}
+
 // Initializers
 
 void Game::initWindow()
@@ -50,6 +64,18 @@ void Game::initWindow()
 Game::Game()
 {
   this->initWindow();
+
+  for (int y = 0; y < GRID_HEIGHT; y++)
+  {
+    for (int x = 0; x < GRID_WIDTH; x++)
+    {
+      if (x + (y % 2) > GRID_WIDTH - 1) continue;
+      if (x % 2 == 0)
+      {
+        this->tileGrid[y][x + y % 2].type = TileType::SAND;
+      }
+    }
+  }
 }
 
 Game::~Game()
@@ -83,15 +109,16 @@ void Game::update()
 
 void Game::renderGrid()
 {
-  sf::RectangleShape gridTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
-  gridTile.setFillColor(sf::Color::Green);
+  sf::RectangleShape tile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
 
-  for (int y = 0; y < 2; y++)
+  for (int y = 0; y < GRID_HEIGHT; y++)
   {
-    for (int x = 0; x < 2; x++)
+    for (int x = 0; x < GRID_WIDTH; x++)
     {
-      gridTile.setPosition(sf::Vector2f(x * TILE_SIZE, y * TILE_SIZE));
-      this->window->draw(gridTile);
+      if (this->tileGrid[y][x].type == TileType::AIR) continue;
+      tile.setFillColor(getTileColor(this->tileGrid[y][x].type));
+      tile.setPosition(sf::Vector2f(x * TILE_SIZE, y * TILE_SIZE));
+      this->window->draw(tile);
     }
   }
 }

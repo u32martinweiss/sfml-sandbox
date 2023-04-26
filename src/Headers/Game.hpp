@@ -5,12 +5,14 @@
 #include <libconfig.h++>
 #include <iostream>
 
+#include "../Structs/Tile.hpp"
 #include "../Constants.hpp"
 
 class Game {
   private:
     sf::RenderWindow* window;
     sf::Event sfEvent;
+    Tile tileGrid[GRID_HEIGHT][GRID_WIDTH];
 
     // Initializers
     void initWindow();
