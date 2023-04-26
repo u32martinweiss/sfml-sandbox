@@ -81,9 +81,25 @@ void Game::update()
 
 // Render Functions
 
+void Game::renderGrid()
+{
+  sf::RectangleShape gridTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+  gridTile.setFillColor(sf::Color::Green);
+
+  for (int y = 0; y < 2; y++)
+  {
+    for (int x = 0; x < 2; x++)
+    {
+      gridTile.setPosition(sf::Vector2f(x * TILE_SIZE, y * TILE_SIZE));
+      this->window->draw(gridTile);
+    }
+  }
+}
+
 void Game::render()
 {
   this->window->clear();
+  this->renderGrid();
   this->window->display();
 }
 

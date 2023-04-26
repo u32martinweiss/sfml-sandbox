@@ -5,6 +5,8 @@
 #include <libconfig.h++>
 #include <iostream>
 
+#include "../Constants.hpp"
+
 class Game {
   private:
     sf::RenderWindow* window;
@@ -23,6 +25,7 @@ class Game {
     void update();
 
     // Render Functions
+    void renderGrid();
     void render();
 
     // Functions
