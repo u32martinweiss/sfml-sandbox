@@ -22,8 +22,14 @@ class Game {
     Game();
     virtual ~Game();
 
+    // Clocks
+    sf::Clock tickClock;
+    float tickTime;
+
     // Update Functions
     void updateSFMLEvent();
+    void updateClocks();
+    void updatePhysics();
     void update();
 
     // Render Functions

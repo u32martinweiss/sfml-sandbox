@@ -100,9 +100,45 @@ void Game::updateSFMLEvent()
   }
 }
 
+void Game::updatePhysics()
+{
+  if (tickTime < TICK_INTERVAL) return;
+
+  for (int y = 0; y < GRID_HEIGHT; y++)
+  {
+    for (int x = 0; x < GRID_WIDTH; x++)
+    {
+      if (this->tileGrid[y][x].type == TileType::AIR) continue;
+
+      switch (this->tileGrid[y][x].type)
+      {
+        case TileType::SAND:
+          if (y + 1 > GRID_HEIGHT - 1 || this->tileGrid[y + 1][x].type != TileType::AIR)
+            break;
+
+          this->tileGrid[y][x].type = TileType::AIR;
+          this->tileGrid[y + 1][x].type = TileType::SAND;
+          break;
+
+        default:
+          break;
+      }
+    }
+  }
+
+  this->tickClock.restart();
+}
+
+void Game::updateClocks()
+{
+  this->tickTime = this->tickClock.getElapsedTime().asSeconds();
+}
+
 void Game::update()
 {
   this->updateSFMLEvent();
+  this->updateClocks();
+  this->updatePhysics();
 }
 
 // Render Functions
